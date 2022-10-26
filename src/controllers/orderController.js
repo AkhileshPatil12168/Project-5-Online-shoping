@@ -2,7 +2,7 @@
 
 const cartModel = require("../models/cartModel")
 const orderModel = require('../models/orderModel');
-const { isValidObjectId, isValidStatus} = require("../utils/validators")
+const { isValidObjectId, isValidStatus } = require("../utils/validators")
 
 const orderCreation = async function (req, res) {
     try {
@@ -61,7 +61,7 @@ const updateOrder = async function (req, res) {
 
         const newOrder = await orderModel.findById(orderId)
         if (!newOrder) return res.status(404).send({ status: false, message: "order not found" })
-        
+
 
         if (!status) return res.status(400).send({ status: false, message: "status is mandatory" })
         if (!isValidStatus(status)) return res.status(400).send({ status: false, message: "status should be pending, completed,cancelled" })

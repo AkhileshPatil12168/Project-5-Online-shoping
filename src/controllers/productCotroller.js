@@ -182,7 +182,7 @@ const getProductsById = async function (req, res) {
         if (!isValidObjectId(productId)) return res.status(400).send({ status: false, message: "provide a valid Product Id" })
 
 
-        let productsDetails = await productModel.findOne({_id :productId, isDeleted : false})
+        let productsDetails = await productModel.findOne({ _id: productId, isDeleted: false })
         if (!productsDetails) return res.status(404).send({ status: false, message: "Product Not Found" })
 
         return res.status(200).send({ status: true, message: "Success", data: productsDetails })
@@ -203,13 +203,13 @@ const updateProduct = async (req, res) => {
         if (!isValidObjectId(productId)) return res.status(400).send({ status: false, message: "provide a valid Product Id" })
 
 
-        let productsDetails = await productModel.findOne({_id :productId, isDeleted : false})
+        let productsDetails = await productModel.findOne({ _id: productId, isDeleted: false })
         if (!productsDetails) return res.status(404).send({ status: false, message: "Product Not Found" })
         if (emptyBody(data)) return res.status(400).send({ status: false, message: "provide some data" })
 
         let { title, description, price, isFreeShipping, style, size, installments, productImage } = data
         data.isDeleted = false
-        if (title || title === "") { 
+        if (title || title === "") {
             title = validTrim(title)
             if (!isNotProvided(title)) return res.status(400).send({ status: false, message: "provide the title" })
             if (!isValidTitle(title)) return res.status(400).send({ status: false, message: "provide valid title" })
@@ -217,7 +217,7 @@ const updateProduct = async (req, res) => {
             let isUniqueTitle = await productModel.findOne({ title: data.title });
             if (isUniqueTitle) {
                 return res.status(400).send({ status: false, message: "This title is being used already" })
-            } 
+            }
         }
 
         if (description || description === "") {

@@ -147,7 +147,7 @@ const loginUser = async function (req, res) {
         if (!actualPassword) return res.status(400).send({ status: false, msg: "Incorrect email or password" })
 
 
-        let token = jwt.sign({ userId: user._id },process.env.TOKEN_KEY , {
+        let token = jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
             expiresIn: "2d",
         })
         res.setHeader('Authorization', `Bearer ${token}`)
@@ -343,10 +343,10 @@ const updateUser = async (req, res) => {
 
         let updateData = await userModel.findByIdAndUpdate(userId, data, { new: true })
         res.status(200).send({
-                status: true,
-                message: "Update user profile is successful",
-                data: updateData,
-            })
+            status: true,
+            message: "Update user profile is successful",
+            data: updateData,
+        })
     }
     catch (error) {
         return res.status(500).send({ status: false, msg: error.message })
