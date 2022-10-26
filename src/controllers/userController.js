@@ -147,7 +147,7 @@ const loginUser = async function (req, res) {
         if (!actualPassword) return res.status(400).send({ status: false, msg: "Incorrect email or password" })
 
 
-        let token = jwt.sign({ userId: user._id }, "Product Managemnet", {
+        let token = jwt.sign({ userId: user._id },process.env.TOKEN_KEY , {
             expiresIn: "2d",
         })
         res.setHeader('Authorization', `Bearer ${token}`)
