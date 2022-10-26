@@ -31,4 +31,8 @@ router.get('/users/:userId/cart',authentication,getCart)
 router.post('/users/:userId/orders',authentication,orderCreation)
 router.put('/users/:userId/orders',authentication,updateOrder)
 
+router.all("/*", function (req, res) {
+    res.status(404).send({ status: false, message: "invalid request!!" });
+  });
+
 module.exports = router
