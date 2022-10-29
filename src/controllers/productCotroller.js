@@ -243,7 +243,7 @@ const updateProduct = async (req, res) => {
             let a = ["true", "false"]
             isFreeShipping = validTrim(isFreeShipping)
             if (!a.includes(isFreeShipping)) return res.status(400).send({ status: false, message: "type should be in true or false" })
-            data.isFreeShipping = validTrim(isFreeShipping)
+            data.isFreeShipping = isFreeShipping
         }
 
         if (style) {
